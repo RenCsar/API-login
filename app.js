@@ -15,7 +15,7 @@ app.use(cors())
 app.use(express.json()); // Aceitar Json como resposta de requisição
 
 //Open Route - Public Route
-app.use("/", publicRoute);
+app.get("/", publicRoute);
 
 //Register User
 app.post("/auth/register", registerUser);

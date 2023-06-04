@@ -48,7 +48,7 @@ router.post("/auth/user", async (req, res) => {
     if (!res.headersSent) {
       return res
         .status(200)
-        .json({ msg: "Autenticação realizada com sucesso!", token });
+        .json({ msg: "Autenticação realizada com sucesso!", token, user });
     }
   } catch (error) {
     console.log(error);

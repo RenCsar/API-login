@@ -18,7 +18,7 @@ router.post("/auth/user", async (req, res) => {
   }
 
   //Check user exists
-  const user = await User.findOne({ email: email })
+  const user = await User.findOne({ email: email });
 
   if (!user) {
     return res.status(404).json({ msg: "Usuário não encontrado!" });
@@ -46,9 +46,15 @@ router.post("/auth/user", async (req, res) => {
     );
 
     if (!res.headersSent) {
-      return res
-        .status(200)
-        .json({ msg: "Autenticação realizada com sucesso!", token, user });
+      return res.status(200).json({
+        msg: "Autenticação realizada com sucesso!",
+        token,
+        user: {
+          _id: user._id,
+          name: user.name,
+          email: user.email,
+        },
+      });
     }
   } catch (error) {
     console.log(error);

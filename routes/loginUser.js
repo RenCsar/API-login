@@ -45,10 +45,13 @@ router.post("/auth/user", async (req, res) => {
       }
     );
 
+    const userWithoutPassword = { ...user };
+    delete userWithoutPassword.password;
+
     if (!res.headersSent) {
       return res
         .status(200)
-        .json({ msg: "Autenticação realizada com sucesso!", token, user });
+        .json({ msg: "Autenticação realizada com sucesso!", token, userWithoutPassword });
     }
   } catch (error) {
     console.log(error);

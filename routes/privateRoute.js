@@ -17,13 +17,13 @@ const checkToken = (req, res, next) => {
   try {
     const secret = process.env.SECRET;
 
-    // Verificar se o token é válido
+    // Chack if token is valid
     jwt.verify(token, secret);
 
-    // O token é válido, podemos prosseguir para a próxima etapa
+    // The token is valid, next step
     next();
   } catch (error) {
-    // O token é inválido ou expirou
+    // The token is invalid or expired
     return res.status(401).json({ msg: "Token inválido!" });
   }
 };
@@ -31,7 +31,7 @@ const checkToken = (req, res, next) => {
 router.get("/user/:id", checkToken, async (req, res) => {
   const id = req.params.id;
 
-  //Verificar se o ID é válido
+  // Check if the ID is valid
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(400).json({ msg: "ID de usuário inválido" });
   }

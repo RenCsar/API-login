@@ -18,7 +18,7 @@ router.post("/auth/user", async (req, res) => {
   }
 
   //Check user exists
-  const user = await User.findOne({ email: email }, "-password").lean()
+  const user = await User.findOne({ email: email }).select('-password').lean()
 
   if (!user) {
     return res.status(404).json({ msg: "Usuário não encontrado!" });

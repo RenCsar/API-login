@@ -26,8 +26,11 @@ router.post("/auth/register", async (req, res) => {
     return res.status(422).json({ msg: `Digite um e-mail válido!` });
   }
 
+  //Convert email to lowercase
+  const lowercaseEmail = email.toLowerCase()
+
   //Check if user exists
-  const userExists = await User.findOne({ email: email });
+  const userExists = await User.findOne({ email: lowercaseEmail });
 
   if (userExists) {
     return res
@@ -42,7 +45,7 @@ router.post("/auth/register", async (req, res) => {
   //Create user
   const user = new User({
     name,
-    email,
+    email: lowercaseEmail,
     password: passwordHash,
   });
 

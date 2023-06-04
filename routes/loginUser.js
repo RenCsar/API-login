@@ -18,8 +18,7 @@ router.post("/auth/user", async (req, res) => {
   }
 
   //Check user exists
-  // const user = await User.findOne({ email: email });
-  const user = await User.findOne({ email }).select("-password");
+  const user = await User.findOne({ email: email });
 
   if (!user) {
     return res.status(404).json({ msg: "Usuário não encontrado!" });

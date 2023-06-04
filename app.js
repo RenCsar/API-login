@@ -8,6 +8,9 @@ const privateRouter = require("./routes/privateRoute");
 
 const app = express();
 
+const cors = require('cors')
+app.use(cors())
+
 //Config JSON response
 app.use(express.json()); // Aceitar Json como resposta de requisição
 

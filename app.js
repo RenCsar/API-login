@@ -11,6 +11,8 @@ const app = express();
 const cors = require('cors')
 app.use(cors())
 
+const porta = process.env.PORT || 3000;
+
 //Config JSON response
 app.use(express.json()); // Aceitar Json como resposta de requisição
 
@@ -35,7 +37,7 @@ mongoose
     `mongodb+srv://${dbUser}:${dbPassWord}@cluster0.se9wkvs.mongodb.net/?retryWrites=true&w=majority`
   )
   .then(() => {
-    app.listen(3000);
+    app.listen(porta);
     console.log("Conectou ao banco!");
   })
   .catch((err) => console.log(err));

@@ -18,7 +18,7 @@ router.post("/auth/user", async (req, res) => {
   }
 
   //Check user exists
-  const user = await User.findOne({ email: email });
+  const user = await User.findOne({ email: email }, "-password").lean()
 
   if (!user) {
     return res.status(404).json({ msg: "Usuário não encontrado!" });
@@ -45,13 +45,10 @@ router.post("/auth/user", async (req, res) => {
       }
     );
 
-    const userWithoutPassword = { ...user };
-    delete userWithoutPassword.password;
-
     if (!res.headersSent) {
       return res
         .status(200)
-        .json({ msg: "Autenticação realizada com sucesso!", token, userWithoutPassword });
+        .json({ msg: "Autenticação realizada com sucesso!", token, user });
     }
   } catch (error) {
     console.log(error);

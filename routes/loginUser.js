@@ -28,7 +28,7 @@ router.post("/auth/user", async (req, res) => {
   const checkPassword = await bcrypt.compare(password, user.password);
 
   if (!checkPassword) {
-    return res.status(422).json({ msg: "Senha inválida" });
+    return res.status(422).json({ msg: "Usuário ou senha inválidos" });
   }
 
   try {
